@@ -2,7 +2,14 @@
 
 koa 注解风格路由
 
+```bash
+yarn add koa
+yarn add koa-annotation-router
+yarn add @types/koa -D
+```
+
 ```js
+import Koa, { Context } from 'koa'
 import Router, { controller, mapping } from 'koa-annotation-router'
 const app = new Koa()
 
@@ -25,8 +32,7 @@ class UserController {
   }
 }
 
-app.use(Router([new UserController('ming'), ...]))
+app.use(Router([new UserController('ming')]))
 
 app.listen(8080)
-
 ```
