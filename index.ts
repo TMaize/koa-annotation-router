@@ -60,7 +60,15 @@ export class Router<StateT = Koa.DefaultState, ContextT = Koa.DefaultContext> ex
   }
 
   public addController(controller: any, ...more: Array<any>): Router<StateT, ContextT> {
-    const controllers = [controller, ...more]
+    const controllers = []
+    if (Array.isArray(controller)) {
+      controllers.push(...controller)
+    } else {
+      controllers.push(controller)
+    }
+    if (more && more.length) {
+      controllers.push(...more)
+    }
     // register routes
     controllers.forEach(controller => {
       if (!controller?.constructor?.annotation?.router) {
